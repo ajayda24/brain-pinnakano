@@ -1,0 +1,679 @@
+/* ===========================================================
+   Reel Lab · Brain Lab · Final report · Certificate
+   =========================================================== */
+
+/* ---------------- reel stage ---------------- */
+.reel__stagewrap {
+  position: relative;
+  height: 440px;
+  border-radius: var(--r);
+  overflow: hidden;
+  background: var(--panel-sunk);
+}
+.reel__protocol {
+  position: absolute;
+  inset: 0;
+  padding: 20px;
+  display: grid;
+  place-items: center;
+}
+.reel__term {
+  width: min(420px, 100%);
+  background: var(--panel);
+  border-color: var(--border);
+  font-size: 12px;
+}
+
+.reelstage {
+  position: relative;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  background: var(--panel-sunk);
+}
+.reelstage__video,
+.reelstage__yt {
+  width: auto;
+  height: 100%;
+  aspect-ratio: 9 / 16;
+  max-width: 100%;
+  display: block;
+  border: 0;
+}
+.reelstage__yt iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.reelstage__loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--ink-3);
+}
+.reelstage__mutehint {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  translate: -50% 0;
+  color: var(--ink-3);
+  background: rgba(255, 255, 255, 0.88);
+  padding: 4px 11px;
+  border-radius: 999px;
+}
+
+/* synthetic reel — the stage takes its tint from the reel's accent */
+.reelstage--synth {
+  background: color-mix(in srgb, var(--accent, #2f6fd0) 7%, #fff);
+}
+.synth {
+  position: relative;
+  width: min(100%, 286px);
+  aspect-ratio: 9 / 16;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 28px 22px;
+  text-align: center;
+  background: var(--panel);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.synth__bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--accent, #2f6fd0);
+}
+.synth__line {
+  position: relative;
+  font-size: 18px;
+  line-height: 1.55;
+  font-weight: 600;
+  color: var(--ink);
+}
+.synth__line--punch {
+  font-size: 25px;
+  color: var(--accent, #2f6fd0);
+  margin-top: 6px;
+}
+.synth__tag {
+  position: absolute;
+  bottom: 14px;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.14em;
+  color: var(--ink-4);
+}
+
+.reel__progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 14px;
+}
+.reel__progress .bar {
+  flex: 1;
+}
+.reel__reportstage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 30px;
+  text-align: center;
+}
+.reel__verdicticon {
+  font-size: 52px;
+  line-height: 1;
+}
+.reel__verdict {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.4;
+  max-width: 440px;
+}
+.reel__verdictsub {
+  margin: 0;
+  font-size: 14px;
+  color: var(--ink-2);
+  max-width: 420px;
+  line-height: 1.6;
+}
+.reel__err {
+  text-align: center;
+  max-width: 400px;
+}
+
+/* reaction timeline */
+.tl__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.tl__chart {
+  width: 100%;
+  height: 66px;
+  display: block;
+  border-radius: var(--r);
+  background: var(--panel-sunk);
+}
+.tl__strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+  gap: 2px;
+}
+.tl__cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  flex: 1;
+  min-width: 0;
+}
+.tl__emoji {
+  font-size: 17px;
+  line-height: 1;
+}
+.tl__dash {
+  width: 100%;
+  height: 1px;
+  background: var(--border-hi);
+}
+.tl__time {
+  font-size: 9.5px;
+  color: var(--ink-4);
+}
+
+/* ---------------- brain lab hub ---------------- */
+.lab__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+.lab__card {
+  --c: var(--blue);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 7px;
+  padding: 20px;
+  border-radius: var(--r-lg);
+  text-align: left;
+  background: color-mix(in srgb, var(--c) 7%, #fff);
+  transition: background 140ms linear;
+}
+.lab__card:hover {
+  background: color-mix(in srgb, var(--c) 13%, #fff);
+}
+.lab__icon {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  background: var(--panel);
+  font-size: 24px;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.lab__title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.lab__sub {
+  font-size: 12.5px;
+  color: var(--ink-2);
+  line-height: 1.55;
+  min-height: 38px;
+}
+.lab__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 6px;
+  padding-top: 12px;
+  border-top: 1px solid color-mix(in srgb, var(--c) 18%, transparent);
+}
+.lab__result {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--c);
+}
+.lab__arrow {
+  color: var(--c);
+  font-size: 15px;
+  transition: transform 200ms var(--ease-out);
+}
+.lab__card:hover .lab__arrow {
+  transform: translateX(4px);
+}
+
+/* ---------------- games ---------------- */
+.game {
+  max-width: 880px;
+  margin: 0 auto;
+}
+.game__stage {
+  position: relative;
+  height: 420px;
+  border-radius: var(--r);
+  overflow: hidden;
+  background: var(--panel-sunk);
+  display: grid;
+  place-items: center;
+}
+.game__intro,
+.game__result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 30px;
+  text-align: center;
+}
+.game__bigicon {
+  width: 78px;
+  height: 78px;
+  display: grid;
+  place-items: center;
+  border-radius: 22px;
+  background: var(--panel);
+  box-shadow: var(--shadow-sm);
+  font-size: 40px;
+  line-height: 1;
+}
+.game__title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.game__sub {
+  margin: 0;
+  font-size: 15px;
+  color: var(--ink-2);
+  line-height: 1.6;
+}
+.game__verdict {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.game__score {
+  margin-top: 6px;
+  padding: 15px 32px;
+  border-radius: var(--r);
+  background: var(--panel);
+  box-shadow: var(--shadow-sm);
+}
+.game__score .label {
+  font-size: 11px;
+  color: var(--ink-3);
+}
+.game__scoreval {
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+.game__scoremax {
+  font-size: 18px;
+  color: var(--ink-3);
+  margin-left: 2px;
+}
+.game__meter {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+/* stare contest */
+.stare__clock {
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--ink);
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+}
+.stare__unit {
+  font-size: 12px;
+  color: var(--ink-3);
+}
+
+/* poker face rounds */
+.pf__rounds {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 8px;
+  margin-top: 14px;
+}
+.pf__round {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 11px 13px;
+  border-radius: var(--r);
+  background: var(--panel-sunk);
+}
+.pf__roundno {
+  font-size: 11px;
+  color: var(--ink-3);
+}
+.pf__grade {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* captcha */
+.cap__prompt {
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.cap__sub {
+  margin: 0 0 16px;
+}
+.cap__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+}
+.cap__opt {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 16px 18px;
+  border-radius: var(--r);
+  background: var(--panel-sunk);
+  text-align: left;
+  transition: background 160ms linear;
+}
+.cap__opt:hover:not(:disabled) {
+  background: var(--blue-soft);
+}
+/* Your pick reads as a deliberate selection; the others arrive a beat later in
+   a deliberately softer treatment, so "all of the above" lands as a punchline
+   rather than looking like every option got selected at once. */
+.cap__opt--picked {
+  background: var(--blue-soft);
+  box-shadow: inset 0 0 0 2px var(--blue);
+}
+.cap__opt--also {
+  background: var(--green-soft);
+}
+.cap__tag {
+  margin-left: auto;
+  flex: none;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  background: var(--blue);
+  color: #fff;
+  white-space: nowrap;
+}
+.cap__tag--also {
+  background: transparent;
+  color: var(--green);
+  padding-inline: 0;
+}
+.cap__emoji {
+  font-size: 22px;
+  line-height: 1;
+}
+.cap__label {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.cap__reveal {
+  margin-top: 16px;
+  padding: 16px 18px;
+  border-radius: var(--r);
+  background: var(--green-soft);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.cap__revealtitle {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--green);
+}
+
+/* ---------------- final report ---------------- */
+.final {
+  position: relative;
+  height: 100%;
+  overflow-y: auto;
+  display: grid;
+  place-items: center;
+  padding: 30px 20px;
+}
+.final__computing {
+  width: min(520px, 100%);
+}
+.final__term {
+  background: var(--panel);
+  border-color: var(--border);
+  box-shadow: var(--shadow);
+  font-size: 13px;
+  min-height: 210px;
+}
+.final__card {
+  position: relative;
+  z-index: 1;
+  width: min(620px, 100%);
+  padding: 34px 38px 28px;
+  border-radius: var(--r-xl);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+}
+.final__rule {
+  height: 4px;
+  border-radius: 999px;
+  background: var(--blue);
+}
+.final__heading {
+  margin-top: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: var(--ink-3);
+}
+.final__scorelabel {
+  margin-top: 20px;
+  font-size: 12px;
+  color: var(--ink-3);
+}
+.final__score {
+  font-family: var(--font-ui);
+  font-size: clamp(74px, 14vw, 112px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  font-variant-numeric: tabular-nums;
+}
+.final__pct {
+  font-size: 0.34em;
+  margin-left: 4px;
+  opacity: 0.6;
+}
+.final__classification {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+  padding: 11px 24px;
+  border-radius: 999px;
+  font-size: 19px;
+  font-weight: 700;
+}
+.final__classemoji {
+  font-size: 22px;
+}
+.final__verdict {
+  margin: 14px auto 0;
+  max-width: 430px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+.final__rows {
+  margin-top: 24px;
+  padding: 18px;
+  border-radius: var(--r);
+  background: var(--panel-sunk);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.final__row {
+  display: grid;
+  grid-template-columns: 118px 1fr 48px;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+}
+.final__rowlabel {
+  font-size: 12.5px;
+  color: var(--ink-2);
+}
+.final__rowval {
+  font-size: 12.5px;
+  font-weight: 700;
+  text-align: right;
+}
+.final__highlights {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(106px, 1fr));
+  gap: 8px;
+  margin-top: 14px;
+}
+.final__hl {
+  padding: 12px 10px;
+  border-radius: var(--r);
+  background: var(--panel-sunk);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.final__hlval {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.final__hllabel {
+  font-size: 10px;
+  line-height: 1.35;
+  color: var(--ink-3);
+}
+.final__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+.final__disclaimer {
+  margin: 16px auto 18px;
+  max-width: 430px;
+}
+
+/* ---------------- certificate ---------------- */
+.cert {
+  position: relative;
+  height: 100%;
+  overflow-y: auto;
+  padding: 26px 20px 40px;
+}
+.cert__inner {
+  position: relative;
+  z-index: 1;
+  width: min(760px, 100%);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.cert__header {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.cert__title {
+  margin: 0 0 2px;
+  font-size: 23px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.cert__paper {
+  position: relative;
+  width: 100%;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border);
+  background: var(--panel);
+}
+.cert__canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: opacity 400ms var(--ease-out);
+}
+.cert__loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  z-index: 2;
+  color: var(--ink-3);
+}
+.cert__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 720px) {
+  .reel__stagewrap,
+  .game__stage {
+    height: 340px;
+  }
+  .final__card {
+    padding: 24px 20px 20px;
+  }
+}

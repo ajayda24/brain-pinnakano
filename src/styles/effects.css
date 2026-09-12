@@ -1,0 +1,329 @@
+/* ============================================================
+   PINNAKK OS — surfaces, cards, pills, bars
+   White cards, hairline borders, soft shadows, pastel tints.
+   No gradient fills, no glow, no moving background.
+   ============================================================ */
+
+/* ---- backdrop: a plain pale page ---- */
+.mesh {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-color: var(--bg);
+}
+
+/* ---- cards ---- */
+.panel {
+  position: relative;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+/* The title lives inside the card, not on a separate strip: heading, optional
+   grey subtitle, and actions floated to the right. */
+.panel__head {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px 20px 0;
+}
+.panel__titlewrap {
+  min-width: 0;
+}
+.panel__title {
+  margin: 0;
+  font-family: var(--font-mixed);
+  font-size: 16.5px;
+  font-weight: 700;
+  letter-spacing: -0.011em;
+  color: var(--ink);
+  line-height: 1.3;
+}
+.panel__title .em {
+  margin-right: 6px;
+}
+.panel__sub {
+  margin: 3px 0 0;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+.panel__spacer {
+  flex: 1;
+}
+.panel__body {
+  padding: 16px 20px 20px;
+}
+.panel__head + .panel__body {
+  padding-top: 14px;
+}
+
+/* round icon button, the "..." in the reference */
+.iconbtn {
+  width: 32px;
+  height: 32px;
+  flex: none;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--ink-3);
+  background: var(--panel);
+  border: 1px solid var(--border-hi);
+  font-size: 14px;
+  line-height: 1;
+  transition: background 140ms linear, color 140ms linear;
+}
+.iconbtn:hover {
+  background: var(--panel-sunk);
+  color: var(--ink);
+}
+
+/* ---- pills: pastel tint + dot + matching text ---- */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: var(--c-soft, var(--blue-soft));
+  color: var(--c, var(--blue));
+  border: 0;
+  font-family: var(--font-mixed);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  white-space: nowrap;
+}
+.chip__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex: none;
+}
+
+/* status dot on its own (legends) */
+.led {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--c, var(--green));
+  flex: none;
+}
+
+/* ---- bars: pastel track, rounded solid fill ---- */
+.bar {
+  position: relative;
+  height: var(--h, 8px);
+  border-radius: 999px;
+  background: var(--track, var(--panel-sunk));
+  overflow: hidden;
+}
+.bar__ghost {
+  display: none;
+}
+.bar__fill {
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  border-radius: 999px;
+  background: var(--c, var(--blue));
+  transition: width 260ms var(--ease-out);
+  will-change: width;
+}
+
+/* segmented block bar, for terminal moments */
+.blockbar {
+  font-family: var(--font-mono);
+  letter-spacing: -0.5px;
+  color: var(--c, var(--blue));
+  white-space: nowrap;
+}
+.blockbar .off {
+  color: var(--border-hi);
+}
+
+/* ---- terminal ---- */
+.term {
+  font-family: var(--font-mono-mixed);
+  font-size: 12.5px;
+  line-height: 1.8;
+  color: var(--ink-2);
+  background: var(--panel-sunk);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 16px 18px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-y: auto;
+}
+.term .ok {
+  color: var(--green);
+}
+.term .warn {
+  color: var(--amber);
+}
+.term .err {
+  color: var(--red);
+}
+.term .dim {
+  color: var(--ink-4);
+}
+.term .hi {
+  color: var(--blue);
+  font-weight: 600;
+}
+.caret {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.05em;
+  translate: 0 0.18em;
+  background: var(--blue);
+  animation: caret 1s steps(2, start) infinite;
+}
+@keyframes caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ---- scan frame (camera only) ---- */
+.scanframe {
+  position: relative;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: #eef1f8;
+  border: 1px solid var(--border-hi);
+}
+.scanframe__corner {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--blue);
+  border-radius: 3px;
+  opacity: 0.75;
+  z-index: 3;
+}
+.scanframe__corner--tl {
+  top: 12px;
+  left: 12px;
+  border-right: 0;
+  border-bottom: 0;
+}
+.scanframe__corner--tr {
+  top: 12px;
+  right: 12px;
+  border-left: 0;
+  border-bottom: 0;
+}
+.scanframe__corner--bl {
+  bottom: 12px;
+  left: 12px;
+  border-right: 0;
+  border-top: 0;
+}
+.scanframe__corner--br {
+  bottom: 12px;
+  right: 12px;
+  border-left: 0;
+  border-top: 0;
+}
+.scanframe__line {
+  position: absolute;
+  inset-inline: 0;
+  height: 2px;
+  background: var(--blue);
+  opacity: 0.5;
+  animation: scanline 3.2s var(--ease-in-out) infinite;
+  z-index: 3;
+}
+@keyframes scanline {
+  0%,
+  100% {
+    top: 5%;
+  }
+  50% {
+    top: 95%;
+  }
+}
+
+/* ---- buttons ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border-radius: 999px;
+  font-family: var(--font-mixed);
+  font-size: 13.5px;
+  font-weight: 600;
+  background: var(--panel);
+  border: 1px solid var(--border-hi);
+  color: var(--ink-2);
+  transition: background 140ms linear, border-color 140ms linear, color 140ms linear;
+}
+.btn:hover:not(:disabled) {
+  background: var(--panel-sunk);
+  color: var(--ink);
+}
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.btn--primary {
+  background: var(--blue);
+  color: #fff;
+  border-color: var(--blue);
+}
+.btn--primary:hover:not(:disabled) {
+  background: #2a63bb;
+  border-color: #2a63bb;
+  color: #fff;
+}
+.btn--amber {
+  background: var(--amber-soft);
+  color: var(--amber);
+  border-color: transparent;
+}
+.btn--amber:hover:not(:disabled) {
+  background: #fbeed6;
+  color: var(--amber);
+}
+.btn--ghost {
+  background: transparent;
+  border-color: var(--border-hi);
+}
+.btn--sm {
+  padding: 7px 15px;
+  font-size: 12.5px;
+}
+.btn--danger {
+  background: var(--red-soft);
+  border-color: transparent;
+  color: var(--red);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.btn--danger:hover:not(:disabled) {
+  background: #fbe0e6;
+  color: var(--red);
+}
+
+/* ---- reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  .scanframe__line,
+  .caret {
+    animation: none !important;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 1ms !important;
+  }
+}
