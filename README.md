@@ -1,189 +1,108 @@
-# 🧠 നിന്റെ തലയിൽ പിണ്ണാക്കാണോ? — PINNAKK OS™
+![Face Scan](docs/screenshots/02-face-scan.png)
 
-An unnecessarily advanced brain diagnostic operating system.
 
-It reads your webcam, estimates your facial expressions, and reports — with total
-scientific confidence — how much പിണ്ണാക്ക് is in your തല.
 
-**It is a joke.** Every number it produces is invented for comedy. It does not
-diagnose intelligence, personality, mental health, or any medical condition.
-Face analysis runs entirely in your browser; no frames are recorded, uploaded or
-stored anywhere, because there is no server.
+# നിന്റെ തലയിൽ പിണ്ണാക്കാണോ? (PINNAKK OS™) 🎯
 
----
 
-## Run it
+## Basic Details
+### Team Name: Merge Conflicts
 
+
+### Team Members
+- Team Lead: Ajay Daniel Trevor - IETCU
+- Member 2: Trishaa B - IETCU
+
+### Project Description
+An unnecessarily advanced brain diagnostic operating system. It reads your webcam, estimates your facial expressions entirely in the browser, and reports — with total scientific confidence — exactly how much പിണ്ണാക്ക് is currently in your തല. It then issues you a certificate about it.
+
+### The Problem (that doesn't exist)
+For generations, Malayalis have been accusing each other of having പിണ്ണാക്ക് in their heads. Not once has anyone produced a number. There is no dashboard, no percentage, no downloadable proof. Your amma has been making this diagnosis by eye, unverified, for your entire life.
+
+### The Solution (that nobody asked for)
+Real computer vision, pointed at a completely fake problem. A MediaPipe face model tracks 52 facial blendshapes at 20fps, and we feed all of that genuine signal into metrics we invented: Brain CPU, Overthinking %, Social Battery, ചായ Requirement, and your live പിണ്ണാക്ക് level in both percent and kilograms. There is a Task Manager where `Punnakk.exe` cannot be ended, a Reel Lab that measures whether reels are working on you, four games that judge your face, and a Final Report that ends in an officially-sealed certificate telling you not to improve.
+
+## Technical Details
+### Technologies/Components Used
+For Software:
+- TypeScript, HTML, CSS
+- React 18, Vite 6
+- @mediapipe/tasks-vision (FaceLandmarker — 52 blendshapes + head pose, running on WASM in-browser), Zustand (state), Motion/Framer Motion (animation), Fontsource (self-hosted Anek Malayalam, Space Grotesk, JetBrains Mono), Canvas 2D API (certificate rendering)
+- Node.js, Playwright (automated end-to-end verification), Git
+
+For Hardware:
+- A webcam (any laptop one will do)
+- A തല (required, not included)
+- No other hardware — this runs entirely in a browser tab
+
+### Implementation
+For Software:
+# Installation
 ```bash
 npm install
 ```
+This also downloads the face model (~3.8 MB) into `public/mp/models/` and copies MediaPipe's WASM runtime out of `node_modules`. Both are vendored locally, so the app never depends on a CDN at demo time.
 
+# Run
 ```bash
 npm run dev
 ```
-
 Then open **http://localhost:5173**.
 
-> **The camera needs `localhost` or HTTPS.** Opening the dev server over a LAN IP
-> (`http://192.168.x.x:5173`) means the browser silently refuses camera access
-> and the app falls into simulation mode. This matters on demo day.
+> ⚠️ The camera needs `localhost` or HTTPS. Opening the dev server over a LAN IP means the browser silently refuses camera access and the app falls back to simulation mode.
 
-`npm install` downloads the face model (~3.8 MB) into `public/mp/models/` and
-copies MediaPipe's wasm runtime out of `node_modules`. Both are vendored so the
-app never needs a CDN at runtime.
+No camera, no internet, or hackathon wifi died? Every screen still works in simulation mode — open **http://localhost:5173/?sim=1**. The app says plainly when it is on; invented signals are never passed off as a reading of a real face.
 
-### No camera? No internet? No problem.
-
-```
-http://localhost:5173/?sim=1
-```
-
-Simulation mode generates plausible expression signals so every screen still
-works. It also kicks in automatically if the camera is refused or the model
-fails to load, and the UI always says plainly when it is on — invented signals
-are never passed off as a reading of a real face.
-
----
-
-## ⚙️ Before your demo: add your own reels
-
-Edit **one file**: [`src/config/reels.ts`](src/config/reels.ts).
-
-Take the ID out of a YouTube Shorts URL:
-
-```
-https://www.youtube.com/shorts/dQw4w9WgXcQ
-                               ^^^^^^^^^^^
-```
-
-and add an entry:
-
-```ts
-{ id: 'r1', type: 'youtube', videoId: 'dQw4w9WgXcQ', title: 'Reel 1', escalation: 2 },
-```
-
-`escalation` is 1 (mildly funny) to 3 (devastating) — POKER FACE plays them in
-ascending order, so spread them out.
-
-Two other sources are supported, and the config explains both:
-
-| type | use when |
-|---|---|
-| `youtube` | normal case — needs internet, and the video must allow embedding |
-| `local` | safest for a live demo: drop an `.mp4` in `public/reels/`, zero network |
-| `synthetic` | built-in animated joke cards. **16 ship enabled**, so the app works out of the box |
-
-Playlists are shuffled per session, so a second run through the demo is not a
-replay of the first. A dead embed skips to the next reel in character rather
-than hanging.
-
----
-
-## What's in it
-
-| | |
-|---|---|
-| **Boot sequence** | Common sense stalls at 23%. Motivation gives up at 4%. പിണ്ണാക്ക് is found immediately. |
-| **Face scan** | Live landmark overlay, detection checklist, expression estimates. |
-| **KPI tiles** | Pastel headline blocks — processes, utilisation, memory, overthinking, പിണ്ണാക്ക്. |
-| **Performance** | A Task-Manager performance tab: resource rail, 60-second traces, threads/handles/uptime. |
-| **Pinnakk Manager** | Load breakdown by category, analogue dial, current mass in kilograms. |
-| **Thala Task Manager** | Live process table with heat-tinted CPU/Memory columns and pastel status pills. `END TASK` on almost anything returns `ERROR 403`. |
-| **Reel Lab** | 16 built-in reels, shuffled. Reaction timeline at 4 Hz, then a report and a randomised verdict. |
-| **Brain Lab** | Don't Laugh · Poker Face · Stare Contest · Human Captcha. |
-| **Final report** | Dramatic score reveal and classification, from 🧠 തല ക്ലീൻ to 🐄🔥 പിണ്ണാക്ക് തന്നെ തല. |
-| **Certificate** | Canvas-drawn, guilloché border and seal, downloadable PNG. |
-
-The Final Report unlocks after one reel and one brain game.
-
-**The numbers behave like a real monitor.** The CPU column sums to the headline
-figure instead of each row inventing its own, memory is accounted against a
-16 GB total, temperature lags load the way thermal mass does, and traces wander
-rather than vibrate. All of it is still completely made up — it just stops
-looking made up, which is funnier.
-
-Exactly one process can actually be ended. It is `ActualWork.exe`, and ending it
-raises your പിണ്ണാക്ക്.
-
----
-
-## How it works
-
-```
-src/
-  face/       camera + MediaPipe FaceLandmarker -> smoothed signals -> discrete events
-  state/      10 Hz metrics tick, process table, session log, final scoring
-  config/     all the Malayalam content, reels, processes, quips, classifications
-  stages/     boot, scan, desktop, reel lab, brain lab, final report, certificate
-  certificate/ canvas renderer for the PNG
-```
-
-- **Signals.** MediaPipe emits 52 ARKit blendshapes per frame at ~20 fps. These
-  fold into a handful of smoothed 0–1 signals (smile, laugh, confusion, gaze,
-  head pose, motion energy) in `src/face/signals.ts`.
-- **Events, not frames.** Everything downstream reacts to discrete events with
-  hysteresis and cooldowns (`src/face/events.ts`), which is what stops the app
-  from screaming on every frame.
-- **Rendering.** React owns structure; the hot readouts subscribe to the metrics
-  tick and write to the DOM directly (`src/components/ui/live.tsx`). That split
-  keeps a dozen gauges animating without the UI turning to soup.
-- **Look.** Soft pastel design language: white cards with hairline borders and
-  very low shadows on a pale lavender page, generous corner radii, pill status
-  badges, and a labelled sidebar. Colour only ever appears as a pastel *tint*
-  carrying a darker tone of the same hue — no gradient fills, no glow, no
-  moving background. Tokens live in `src/styles/tokens.css`; change the palette
-  there and the whole app follows.
-- **Responsive.** Works down to a 390px phone: the sidebar becomes a scrolling
-  strip, the performance rail turns horizontal, the process table drops its
-  Memory column, and the KPI tiles go two-up. `src/styles/responsive.css` is
-  imported last and is the final word on layout. Note the guard at the top of
-  that file — grid and flex items default to a min-content floor, and one wide
-  child (a canvas sized from its own container, in our case) will otherwise
-  blow out the whole page width.
-- **Malayalam.** The typewriter segments by *grapheme*, not code unit, so
-  conjuncts never tear mid-animation. On the certificate canvas, letter-spacing
-  is applied only to Latin runs — tracking a Malayalam run pushes combining
-  marks off their base glyphs.
-
----
-
-## Testing
-
-```bash
-npm run smoke
-```
-
-Drives the whole app through a real browser (system Edge or Chrome — nothing is
-downloaded) and writes screenshots to `scripts/shots/`. It walks boot → scan →
-dashboard → both `END TASK` outcomes → reel lab → three brain games → final
-report → certificate, then checks the app degrades gracefully when the camera
-works but no face is in frame. It also asserts that the process table's CPU
-column still sums to the headline total, that toasts clear the header, and
-that the captcha marks exactly one option before its reveal.
-
-The last pass reloads the whole app at 390x844 and fails on any horizontal
-overflow — including the sneaky case where the layout viewport silently widens
-to fit overflowing content.
-
-The dev server must be running. It defaults to `http://localhost:5173`; pass a
-URL to test something else, such as a production preview:
-
-```bash
-npm run smoke -- http://localhost:4173
-```
-
-**What it cannot test:** MediaPipe's actual blendshape output, which needs a real
-face in front of a real camera. Check that one yourself — smile, look away, sit
-very still, and shake your head, and watch the alerts fire.
-
----
-
-## Build & deploy
-
+Production build (fully static, deployable anywhere):
 ```bash
 npm run build
 ```
 
-Produces a fully static `dist/` with a relative base, so it can be dropped on
-Netlify, Vercel, GitHub Pages, or any subpath. Serve it over HTTPS or the camera
-will not start.
+Automated walkthrough in a real browser — boot to certificate, desktop and mobile:
+```bash
+npm run smoke
+```
+
+### Project Documentation
+For Software:
+
+# Screenshots (Add at least 3)
+![Landing](docs/screenshots/01-landing.png)
+*The landing screen. The question has been asked for generations; this is the first time it comes with a scan button. The camera and parody disclaimers are stated up front, before anything is switched on.*
+
+![Face Scan](docs/screenshots/02-face-scan.png)
+*Subject acquisition. Live landmark overlay on the webcam feed, a detection checklist that confirms FACE / EYES / NOSE / MOUTH and then hesitates on BRAIN, and live expression estimates. Video never leaves the device.*
+
+![Dashboard](docs/screenshots/03-dashboard.png)
+*The main dashboard. Pastel KPI tiles across the top, then a Windows-Task-Manager-style Performance tab with a resource rail, a 60-second trace, and honest-looking readouts for threads, handles and uptime — all of it measuring nothing.*
+
+![Task Manager](docs/screenshots/04-task-manager.png)
+*THALA TASK MANAGER and PINNAKK MANAGER. The CPU column genuinely sums to the headline figure like a real task manager, `Punnakk.exe` sits at SYSTEM CRITICAL, and the പിണ്ണാക്ക് load is broken down by source — റീൽ പിണ്ണാക്ക്, പഴയ സംഭവം ഓർക്കൽ, പ്രണയ പിണ്ണാക്ക് — with a live weight in kilograms.*
+
+![Error 403](docs/screenshots/07-error-403.png)
+*Attempting to end `പഴയ നാണക്കേട്.exe` (running since 2017). The process spends a few seconds pretending to terminate before admitting `ERROR 403 — This memory cannot be deleted.` Exactly one process in the entire system can actually be ended: `ActualWork.exe`, and ending it raises your പിണ്ണാക്ക്.*
+
+![Reel Lab](docs/screenshots/05-reel-lab.png)
+*REEL LAB. A reel plays while your reaction is sampled four times a second, producing a live timeline and a performance report: maximum laugh, attention, smile duration, poker face, and net പിണ്ണാക്ക് change. Ships with 16 built-in Malayalam reels so it needs no internet.*
+
+![Brain Lab](docs/screenshots/06-brain-lab.png)
+*BRAIN LAB. Four diagnostics: Don't Laugh, Poker Face, Stare Contest (real blink detection), and Human Captcha — where every answer is correct, because the answer is always ALL OF THE ABOVE.*
+
+![Final Report](docs/screenshots/08-final-report.png)
+*The FINAL BRAIN REPORT. A dramatic score reveal and a classification ranging from 🧠 തല ക്ലീൻ to 🐄🔥 പിണ്ണാക്ക് തന്നെ തല, with the fictional nature of all of it stated plainly at the bottom.*
+
+![Certificate](docs/screenshots/09-certificate.png)
+*The certificate — drawn pixel by pixel on a canvas with a guilloché border, an arc-text seal, microtext and a decorative data block. Downloadable as a PNG. It closes with "Congratulations. Please don't improve."*
+
+![Mobile](docs/screenshots/10-mobile.png)
+*Runs on a phone too. The sidebar becomes a scrolling strip, the process table drops its Memory column, and the whole app fits a 390px screen — asserted automatically on every test run.*
+
+# Diagrams
+![Workflow](docs/architecture.svg)
+*The signal pipeline. Webcam frames go into MediaPipe and are discarded immediately; 52 blendshapes become smoothed signals, which become discrete events with hysteresis and cooldowns so nothing fires every frame. Those events drive a 10 Hz metrics tick, the process table, the alert toasts and the session log — which finally becomes the report and the certificate. Nothing in this diagram touches a network.*
+
+---
+Made with ❤️ at TinkerHub Useless Projects 
+
+![Static Badge](https://img.shields.io/badge/TinkerHub-24?color=%23000000&link=https%3A%2F%2Fwww.tinkerhub.org%2F)
+![Static Badge](https://img.shields.io/badge/UselessProjects--26-26?link=https%3A%2F%2Ftinkerhub.org%2Fevents%2F1M8ORET9A1%2Fuseless-projects-3.0)
