@@ -1,0 +1,137 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-mixed);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow: hidden;
+}
+
+/* Malayalam needs more vertical room than Latin or its conjuncts collide.
+   Deliberately sets NO font-size: .ml is applied to everything from the 82px
+   hero headline down to inline spans, and any size here either clobbers an
+   explicit one (an element-qualified rule like h1.ml outranks .intro__title)
+   or loses to it. Size is left to the component. */
+:lang(ml),
+.ml {
+  font-family: var(--font-ml);
+  line-height: 1.7;
+}
+
+/* Malayalam set inside small English runs needs a nudge to stay legible.
+   Relative, so it scales with whatever the surrounding text is. */
+.fine .ml,
+.label .ml,
+.disclaimer .ml,
+.statrow__label .ml {
+  font-size: 1.18em;
+}
+
+/* A canvas takes its intrinsic size from its width attribute, and our drawing
+   code sets that attribute from the container's measured width. Without this
+   the two feed back on each other: once a canvas has been drawn wide, its
+   min-content keeps the container wide and the layout can never shrink back.
+   This is what stopped the dashboard from fitting a phone. */
+canvas {
+  max-width: 100%;
+  min-width: 0;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+input {
+  font: inherit;
+  color: inherit;
+}
+
+::selection {
+  background: var(--blue);
+  color: #fff;
+}
+
+/* ---- scrollbars, OS-flavoured ---- */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--ink-4) transparent;
+}
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--ink-4);
+  border: 3px solid transparent;
+  border-radius: 999px;
+  background-clip: content-box;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--ink-3);
+  background-clip: content-box;
+}
+
+/* ---- shared primitives ---- */
+.mono {
+  font-family: var(--font-mono-mixed);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+}
+
+/* Small grey caption. Sentence case, not the old uppercase mono tracking —
+   the pastel language reads quieter. */
+.label {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--ink-3);
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+.fine {
+  font-size: 11px;
+  line-height: 1.55;
+  color: var(--ink-3);
+  letter-spacing: 0.01em;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+  border-radius: 4px;
+}

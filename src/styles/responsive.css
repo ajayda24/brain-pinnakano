@@ -1,0 +1,475 @@
+/* ===========================================================
+   Responsive — tablet and phone
+   Imported last, so it is the final word on layout.
+   =========================================================== */
+
+/* Nothing may push the shell wider than the viewport: grid and flex items
+   default to a min-content floor, which is what lets one wide child blow out
+   the whole layout. */
+.shell > *,
+.bento > *,
+.side,
+.side__nav,
+.main,
+.hdr,
+.panel,
+.workspace,
+.perf,
+.perf__detail,
+.tm__list {
+  min-width: 0;
+}
+
+/* ---------------------------------------------------------------
+   Tablet / small laptop
+   --------------------------------------------------------------- */
+@media (max-width: 1000px) {
+  .shell {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: 12px;
+    padding: 12px;
+  }
+
+  /* the sidebar becomes a compact horizontal strip so it costs almost no
+     vertical space on a short screen */
+  .side {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 10px;
+    min-height: 0;
+  }
+  .side__nav {
+    flex: 1;
+    min-width: 0;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    padding: 8px;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  .side__label,
+  .side__hint,
+  .side .promo {
+    display: none;
+  }
+  .navitem {
+    width: auto;
+    flex: none;
+    padding: 9px 13px;
+    white-space: nowrap;
+  }
+
+  /* the camera preview leaves the rail and floats, since the rail is now a row */
+  .side .pip {
+    position: fixed;
+    left: 12px;
+    bottom: 12px;
+    z-index: 120;
+    width: 132px;
+  }
+  .workspace {
+    padding-bottom: 130px;
+  }
+}
+
+/* ---------------------------------------------------------------
+   Phone
+   --------------------------------------------------------------- */
+@media (max-width: 720px) {
+  /* On a phone the nav strip and the header stack, pushing the content down to
+     ~206px. Measured, not guessed: at 12px the toast stack sat on top of the
+     nav and swallowed taps. */
+  :root {
+    --toast-top: 198px;
+  }
+
+  .shell {
+    gap: 10px;
+    padding: 10px;
+  }
+
+  /* ---- header: greeting on its own line, controls below ---- */
+  .hdr {
+    padding: 12px 14px;
+    gap: 9px;
+  }
+  .hdr__greet {
+    flex: 1 0 100%;
+    margin-right: 0;
+  }
+  .hdr__title {
+    font-size: 15.5px;
+  }
+  .hdr__sub {
+    font-size: 11.5px;
+  }
+  .hdr__meter {
+    padding: 6px 11px;
+    gap: 7px;
+  }
+  .hdr__meterbar {
+    width: 54px;
+  }
+
+  /* toasts span the width so they are readable on a narrow screen */
+  .notifs {
+    right: 10px;
+    left: 10px;
+    width: auto;
+  }
+  .commentary {
+    left: 10px;
+    right: 10px;
+    translate: none;
+    max-width: none;
+    justify-content: center;
+    text-align: center;
+  }
+  .commentary__text {
+    font-size: 14px;
+  }
+
+  /* ---- brand ---- */
+  .brand {
+    padding: 10px 12px;
+  }
+  .brand__mark {
+    width: 30px;
+    height: 30px;
+    font-size: 15px;
+  }
+  .brand__name {
+    font-size: 13.5px;
+  }
+
+  .side .pip {
+    width: 96px;
+  }
+  .workspace {
+    padding-bottom: 96px;
+  }
+
+  /* ---- cards ---- */
+  .panel__head {
+    padding: 15px 15px 0;
+  }
+  .panel__body {
+    padding: 13px 15px 16px;
+  }
+  .panel__title {
+    font-size: 15.5px;
+  }
+  .bento {
+    gap: 12px;
+  }
+
+  /* ---- KPI tiles: two up ---- */
+  .kpis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+    padding: 12px;
+  }
+  .kpi {
+    padding: 14px 13px 12px;
+  }
+  .kpi__value {
+    font-size: 24px;
+  }
+  .kpi__label {
+    font-size: 11.5px;
+  }
+  .kpi--feature {
+    grid-column: span 2;
+  }
+
+  /* ---- performance: rail becomes a scrolling row above the plot ---- */
+  .perf {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+  .perf__rail {
+    flex-direction: row;
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 9px;
+    /* a scrolling flex row still contributes its full min-content without this */
+    min-width: 0;
+  }
+  .perf__railitem {
+    flex: none;
+    gap: 8px;
+    padding: 7px 9px;
+  }
+  .perf__railgraph {
+    display: none;
+  }
+  .perf__detail {
+    padding: 15px;
+  }
+  .perf__name {
+    font-size: 16px;
+  }
+  .perf__big {
+    font-size: 27px;
+  }
+  .perf__stats {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  /* ---- process table: drop Memory, it is the least load-bearing column ---- */
+  .tm__col-ram {
+    display: none;
+  }
+  .tm__head,
+  .tm__row {
+    grid-template-columns: minmax(0, 1fr) 62px minmax(96px, auto);
+  }
+  .tm__name {
+    padding: 8px 10px;
+    gap: 7px;
+  }
+  .tm__icon {
+    display: none;
+  }
+  .tm__nametext {
+    font-size: 11.5px;
+  }
+  .tm__num {
+    padding: 8px 6px;
+    font-size: 11.5px;
+  }
+  .tm__statuscell {
+    padding: 8px 10px 8px 0;
+  }
+  .tm__th {
+    padding: 8px 8px 9px;
+  }
+  .tm__thlabel {
+    font-size: 10.5px;
+  }
+  .chip {
+    padding: 4px 9px;
+    font-size: 10.5px;
+  }
+  .tm__statusbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+    font-size: 11px;
+  }
+
+  /* ---- pinnakk manager ---- */
+  .pk__cat {
+    grid-template-columns: 104px 1fr 36px;
+    gap: 8px;
+  }
+  .pk__catlabel {
+    font-size: 11.5px;
+  }
+  .pk__total {
+    font-size: 26px;
+  }
+  .pk__kg {
+    font-size: 25px;
+  }
+
+  /* ---- reel lab + games ---- */
+  .reel__stagewrap,
+  .game__stage {
+    height: min(62vh, 400px);
+  }
+  .synth {
+    width: min(100%, 220px);
+    padding: 22px 16px;
+  }
+  .synth__line {
+    font-size: 15px;
+  }
+  .synth__line--punch {
+    font-size: 20px;
+  }
+  .reel__verdict {
+    font-size: 17px;
+  }
+  .reel__verdictsub {
+    font-size: 13px;
+  }
+  .game__bigicon {
+    width: 62px;
+    height: 62px;
+    font-size: 32px;
+    border-radius: 18px;
+  }
+  .game__title {
+    font-size: 18px;
+  }
+  .game__sub {
+    font-size: 13.5px;
+  }
+  .game__verdict {
+    font-size: 19px;
+  }
+  .game__scoreval {
+    font-size: 34px;
+  }
+  .game__score {
+    padding: 12px 22px;
+  }
+  .stare__clock {
+    font-size: 46px;
+  }
+  .lab__grid,
+  .cap__grid {
+    grid-template-columns: 1fr;
+  }
+  .lab__sub {
+    min-height: 0;
+  }
+  .cap__prompt {
+    font-size: 18px;
+  }
+  .cap__reveal {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .cap__reveal .btn {
+    width: 100%;
+  }
+  .pf__rounds {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* ---- boot / intro / scan ---- */
+  .boot {
+    padding: 14px;
+  }
+  .boot__panel {
+    padding: 22px 18px 16px;
+  }
+  .boot__brand {
+    font-size: 18px;
+  }
+  .boot__label,
+  .boot__barline {
+    font-size: 11.5px;
+  }
+  .intro {
+    padding: 20px 14px;
+  }
+  .intro__cta {
+    padding: 14px 26px;
+    font-size: 15px;
+  }
+  .intro__notes {
+    padding: 13px 14px;
+  }
+  .scan {
+    padding: 14px;
+  }
+  .scan__grid {
+    gap: 12px;
+  }
+
+  /* ---- final report + certificate ---- */
+  .final {
+    padding: 16px 12px;
+  }
+  .final__card {
+    padding: 22px 16px 18px;
+  }
+  .final__score {
+    font-size: 66px;
+  }
+  .final__classification {
+    font-size: 16px;
+    padding: 9px 18px;
+  }
+  .final__row {
+    grid-template-columns: 94px 1fr 42px;
+    gap: 8px;
+  }
+  .final__rowlabel {
+    font-size: 11.5px;
+  }
+  .final__highlights {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .final__actions .btn {
+    width: 100%;
+  }
+  .cert {
+    padding: 14px 12px 30px;
+  }
+  .cert__title {
+    font-size: 19px;
+  }
+  .cert__actions .btn {
+    width: 100%;
+  }
+
+  /* ---- dialogs ---- */
+  .modal {
+    padding: 12px;
+  }
+  .modal__head {
+    padding: 15px 16px 0;
+  }
+  .modal__head + .panel__body {
+    padding: 13px 16px 16px;
+  }
+  .pd__name {
+    font-size: 15px;
+  }
+  .pd__errcode {
+    font-size: 20px;
+  }
+}
+
+/* ---------------------------------------------------------------
+   Very narrow (small phones)
+   --------------------------------------------------------------- */
+@media (max-width: 400px) {
+  .hdr__meter {
+    display: none;
+  }
+  .pf__rounds {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 340px) {
+  .kpis {
+    grid-template-columns: 1fr;
+  }
+  .kpi--feature {
+    grid-column: span 1;
+  }
+}
+
+/* No hover on touch, so the camera preview's collapse control has to be
+   permanently visible or it is simply unreachable on a phone. */
+@media (hover: none) {
+  .pip__collapse {
+    opacity: 1;
+  }
+}
+
+/* Landscape phones are short: give the stage back some height. */
+@media (max-height: 560px) and (max-width: 1000px) {
+  .reel__stagewrap,
+  .game__stage {
+    height: 78vh;
+  }
+  .side .pip {
+    display: none;
+  }
+  .workspace {
+    padding-bottom: 20px;
+  }
+}
