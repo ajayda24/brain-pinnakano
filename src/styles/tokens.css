@@ -1,0 +1,84 @@
+/* PINNAKK OS — soft pastel design tokens.
+ *
+ * The language: white cards with hairline borders and very soft shadows,
+ * floating on a pale lavender page. Colour arrives as pastel *tints* carrying
+ * a darker text tone of the same hue — never as a saturated fill, and never as
+ * a gradient. Generous corner radii throughout.
+ */
+
+:root {
+  /* ---- surface ---- */
+  --bg: #f1f3f9;
+  --bg-deep: #e9ecf5;
+  --panel: #ffffff;
+  --panel-solid: #ffffff;
+  --panel-hi: #ffffff;
+  --panel-head: #ffffff;
+  --panel-alt: #fafbfe;
+  --panel-sunk: #f4f6fb;
+  --border: #edeff6;
+  --border-hi: #e2e6f0;
+  --border-strong: #c9cfe0;
+
+  /* ---- ink ---- */
+  --ink: #1b2340;
+  --ink-2: #5a6386;
+  --ink-3: #868ea9;
+  --ink-4: #aab2c6;
+
+  /* ---- accents: a readable tone + its pastel tint ---- */
+  --blue: #2f6fd0;
+  --blue-soft: #eaf1fd;
+  --violet: #6b56c8;
+  --violet-soft: #efecfb;
+  --green: #2e9367;
+  --green-soft: #e7f6ef;
+  --red: #d4556b;
+  --red-soft: #fdedf1;
+  --amber: #bd8433;
+  --amber-soft: #fdf4e7;
+  --cyan: #2b8ba3;
+  --cyan-soft: #e7f4f8;
+  --magenta: #b05b96;
+  --magenta-soft: #fbedf6;
+
+  /* chart series — blue family first, like the reference, then pastel hues */
+  --c1: #2a5fae;
+  --c2: #6b56c8;
+  --c3: #2b8ba3;
+  --c4: #d4556b;
+  --c5: #2e9367;
+  --c6: #bd8433;
+
+  /* the three-step blue ramp used for donuts and heatmaps */
+  --ramp-1: #1e4fa3;
+  --ramp-2: #6b93d6;
+  --ramp-3: #b9cff0;
+
+  /* ---- elevation: soft and low-contrast ---- */
+  --shadow-sm: 0 1px 2px rgba(27, 35, 64, 0.04);
+  --shadow: 0 1px 3px rgba(27, 35, 64, 0.04), 0 8px 24px -14px rgba(27, 35, 64, 0.16);
+  --shadow-lg: 0 4px 12px rgba(27, 35, 64, 0.06), 0 28px 56px -24px rgba(27, 35, 64, 0.2);
+
+  /* ---- geometry: generous corners ---- */
+  --r-sm: 8px;
+  --r: 12px;
+  --r-lg: 16px;
+  --r-xl: 22px;
+
+  /* ---- type ---- */
+  --font-ui: 'Space Grotesk Variable', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, 'Cascadia Code', Consolas, monospace;
+  --font-ml: 'Anek Malayalam Variable', 'Noto Sans Malayalam', 'Nirmala UI', sans-serif;
+
+  /* Malayalam mixes into Latin runs constantly, so the stack is always joint. */
+  --font-mixed: var(--font-ui), var(--font-ml);
+  --font-mono-mixed: var(--font-mono), var(--font-ml);
+
+  /* vertical offset for top-anchored toasts: clears the header card
+     (shell padding + header height + grid gap) */
+  --toast-top: 100px;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
