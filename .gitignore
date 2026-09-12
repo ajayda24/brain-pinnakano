@@ -1,0 +1,8 @@
+node_modules
+dist
+.DS_Store
+*.local
+# vendored at install time by scripts/copy-assets.mjs
+public/mp/wasm/
+public/mp/models/
+scripts/shots/
